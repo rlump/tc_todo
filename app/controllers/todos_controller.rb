@@ -9,15 +9,15 @@ class TodosController < ApplicationController
     if params[:user_id]
       @user = User.find_by_id(params[:user_id])
       if @user
-        if (params[:completed] && params[:completed] == "true")
-          @todos = @user.todos.completed
+        if (params[:completed])
+          @todos = @user.todos.completed(params[:completed] == "true" ? true : false)
         else
           @todos = @user.todos
         end
       end
     else
-      if (params[:completed] && params[:completed] == "true")
-        @todos = Todo.completed
+      if (params[:completed])
+        @todos = Todo.completed(params[:completed] == "true" ? true : false)
       else
         @todos = Todo.all
       end
@@ -51,7 +51,7 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.save
         format.html { redirect_to @todo, notice: 'Todo was successfully created.' }
-        format.json { render :show, status: :created, location: @todo }
+        format.json { render json: @todo }
 
       else
         format.html { render :new }
@@ -66,7 +66,7 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.update(todo_params)
         format.html { redirect_to @todo, notice: 'Todo was successfully updated.' }
-        format.json { render :show, status: :ok, location: @todo }
+        format.json { render json: @todo }
       else
         format.html { render :edit }
         format.json { render json: @todo.errors, status: :unprocessable_entity }

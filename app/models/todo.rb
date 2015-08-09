@@ -4,7 +4,7 @@ class Todo < ActiveRecord::Base
   validates_presence_of :user, :message => "user does not exist"
   validate  :due_date_cannot_be_in_the_past
 
-  scope :completed, -> { where(completed: true) }
+  scope :completed, ->(comp) { where("completed = ?", comp) }
 
   belongs_to :user
 
