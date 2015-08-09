@@ -1,7 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: [:show, :edit, :update, :destroy]
 
-  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 
   # GET /todos
   # GET /todos.json
@@ -22,6 +21,10 @@ class TodosController < ApplicationController
       else
         @todos = Todo.all
       end
+    end
+    respond_to do |format|
+        format.html
+        format.json  { render json: @todos }
     end
   end
 
@@ -49,6 +52,7 @@ class TodosController < ApplicationController
       if @todo.save
         format.html { redirect_to @todo, notice: 'Todo was successfully created.' }
         format.json { render :show, status: :created, location: @todo }
+
       else
         format.html { render :new }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
