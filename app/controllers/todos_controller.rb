@@ -9,14 +9,14 @@ class TodosController < ApplicationController
     if params[:user_id]
       @user = User.find_by_id(params[:user_id])
       if @user
-        if (params[:completed])
+        if (params[:completed] == "true" || params[:completed] == "false")
           @todos = @user.todos.completed(params[:completed] == "true" ? true : false)
         else
           @todos = @user.todos
         end
       end
     else
-      if (params[:completed])
+      if (params[:completed] == "true" || params[:completed] == "false")
         @todos = Todo.completed(params[:completed] == "true" ? true : false)
       else
         @todos = Todo.all
