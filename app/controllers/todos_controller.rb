@@ -6,7 +6,23 @@ class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
   def index
-    @todos = Todo.all
+    @todos = []
+    if params[:user_id]
+      @user = User.find_by_id(params[:user_id])
+      if @user
+        if (params[:completed] && params[:completed] == "true")
+          @todos = @user.todos.where("completed = ?", true)
+        else
+          @todos = @user.todos
+        end
+      end
+    else
+      if (params[:completed] && params[:completed] == "true")
+        @todos = Todo.where("completed = ?", true)
+      else
+        @todos = Todo.all
+      end
+    end
   end
 
   # GET /todos/1
@@ -27,6 +43,7 @@ class TodosController < ApplicationController
   # POST /todos.json
   def create
     @todo = Todo.new(todo_params)
+    @todo.user_id = params[:user_id]
 
     respond_to do |format|
       if @todo.save
@@ -69,12 +86,11 @@ class TodosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo
-      @todo = Todo.find(params[:id])
+      @todo = Todo.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
-      puts "params #{params}"
       params.require(:todo).permit(:desc, :due_date, :completed, :user_id)
     end
 end
