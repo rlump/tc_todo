@@ -5,8 +5,11 @@
 FIRST:
 $> rake db:migrate 
 
+THEN: 
+$> rails s
 
-Create a user:
+
+Create a user (server running locally http://localhost:3000):
 
 curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{ "user": { "first_name" : "john" , "last_name" : "doe", "email": "j@d.com" }}' http://localhost:3000/users
 
