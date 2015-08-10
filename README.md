@@ -2,8 +2,8 @@
 
 ## todo json api web server - sqlLite default database
 
-### MUST FIRST ==>
-###  $> rake db:migrate 
+FIRST Migrate ==>
+ $> rake db:migrate 
 
 
 Create a user:
