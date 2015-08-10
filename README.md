@@ -1,5 +1,8 @@
 # tc_todo
 
+# MUST FIRST ==>
+#  $> rake db:migrate 
+
 ## todo json api web server - sqlLite default database
 
 Create a user:
