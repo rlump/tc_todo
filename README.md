@@ -1,6 +1,6 @@
 # tc_todo
 
-## todo json api web server - sqlLite default database
+## todo json api RAILS web server - sqlLite default database
 
 FIRST:
 $> rake db:migrate 
