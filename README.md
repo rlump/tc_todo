@@ -12,7 +12,7 @@ curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POS
 
 Mark as complete todo with id 1:
 
-curl -i -X PUT  -H "Accept: application/json" -H "Content-Type: application/json" -d '{ "todo": { "completed" : "false" }}' http://localhost:3000/todos/1
+curl -i -X PUT  -H "Accept: application/json" -H "Content-Type: application/json" -d '{ "todo": { "completed" : "true" }}' http://localhost:3000/todos/1
 
 Retrieve all todos for user with id 1:
 
