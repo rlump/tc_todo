@@ -2,7 +2,7 @@
 
 ## todo json api web server - sqlLite default database
 
-FIRST ==>
+FIRST:
 $> rake db:migrate 
 
 
